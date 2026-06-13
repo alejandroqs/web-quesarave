@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --color-dark-bg: #0B0C10;
+  --color-dark-card: #121620;
+  --color-dark-surface: #1A1F2E;
+  --color-neon-cyan: #00FFFF;
+  --color-neon-magenta: #FF00FF;
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-bg: rgba(255, 255, 255, 0.04);
+  --color-dark-btn-from: #002b2b;
+  --color-dark-btn-to: #2b002b;
+
+  --shadow-neon-cyan: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.15);
+  --shadow-neon-magenta: 0 0 20px rgba(255, 0, 255, 0.4), 0 0 60px rgba(255, 0, 255, 0.15);
+  --shadow-neon-cyan-inset: inset 0 0 14px rgba(0, 255, 255, 0.18);
+  --shadow-neon-magenta-inset: inset 0 0 14px rgba(255, 0, 255, 0.18);
+  --shadow-neon-btn: 0 0 22px rgba(0, 255, 255, 0.35), 0 0 45px rgba(255, 0, 255, 0.25);
+  --shadow-neon-btn-hover: 0 0 35px rgba(0, 255, 255, 0.55), 0 0 70px rgba(255, 0, 255, 0.45);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  --animate-expand-down: expand-down 180ms ease-out forwards;
+  --animate-fade-in: fade-in 300ms ease-out forwards;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-pulse-live: pulse-live 1.5s ease-in-out infinite;
+}
+
+@keyframes expand-down {
+  0% { opacity: 0; max-height: 0; transform: translateY(-8px); }
+  100% { opacity: 1; max-height: 500px; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.6); }
+}
+
+@keyframes pulse-live {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #0B0C10;
+    color: #E0E0E0;
+  }
+
+  /* Dark scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #0B0C10; }
+  ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
+}
+
+/* Glassmorphic Panel class */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}

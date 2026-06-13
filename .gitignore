@@ -1,0 +1,22 @@
+# Node dependencies
+node_modules/
+
+# Astro build output and cache
+dist/
+.astro/
+
+# Cloudflare Wrangler (Local D1 database state & cache)
+.wrangler/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS specific files
+.DS_Store
+Thumbs.db

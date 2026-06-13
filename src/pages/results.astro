@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ResultsDashboard from '../components/ResultsDashboard';
+
+export const prerender = false;
+---
+<Layout title="QuesaRave — Resultados / Results">
+  <div class="w-full max-w-lg animate-fade-in">
+    <ResultsDashboard client:load />
+  </div>
+</Layout>

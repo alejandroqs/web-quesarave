@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VoteForm from '../components/VoteForm';
+
+export const prerender = false;
+---
+<Layout title="QuesaRave — Confirma tu Asistencia">
+  <div class="w-full max-w-lg">
+    <!-- Preact island: hydrated immediately on page load -->
+    <VoteForm client:load />
+  </div>
+</Layout>

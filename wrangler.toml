@@ -1,0 +1,10 @@
+name = "quesarave"
+compatibility_date = "2026-06-01"
+
+[assets]
+directory = "./dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "quesarave"
+database_id = "5a9bfdf4-7214-44b6-a25b-6130ffb94dfa"
