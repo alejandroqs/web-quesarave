@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+// @ts-ignore
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
@@ -7,21 +9,20 @@ function jsonResponse(status: number, body: object) {
     status,
     headers: {
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=5', // edge cache for 5 seconds to reduce DB load
+      'Cache-Control': 'public, max-age=5',
     },
   });
 }
 
-export const GET: APIRoute = async (context) => {
+export const GET: APIRoute = async () => {
   try {
-    // Resolve D1 database binding via Astro Context
-    const db = (context.locals as any).runtime?.env?.DB;
+    // Resolve D1 database binding via native cloudflare:workers env
+    const db = (env as any).DB;
 
     if (!db) {
       return jsonResponse(500, { success: false, error: 'Database binding "DB" not found.' });
     }
 
-    // Execute query to get aggregates
     const query = `
       SELECT 
         COUNT(*) as total_responses,

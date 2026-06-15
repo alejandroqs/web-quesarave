@@ -1,4 +1,6 @@
 import type { APIRoute } from 'astro';
+// @ts-ignore
+import { env } from 'cloudflare:workers';
 
 export const prerender = false;
 
@@ -47,8 +49,8 @@ export const POST: APIRoute = async (context) => {
     const userAgent = context.request.headers.get('user-agent') || 'unknown';
     const fingerprint = await generateFingerprint(ip, userAgent);
 
-    // 4. Resolve D1 database binding via Astro Context
-    const db = (context.locals as any).runtime?.env?.DB;
+    // 4. Resolve D1 database binding via native cloudflare:workers env
+    const db = (env as any).DB;
 
     if (!db) {
       return jsonResponse(500, { success: false, error: 'Database binding "DB" not found.' });
@@ -65,7 +67,6 @@ export const POST: APIRoute = async (context) => {
     const existingByFingerprint = batchResult[1].results?.[0] || null;
 
     // Scenario A: Multicount Fraud
-    // If the email is new, but the device fingerprint already exists under a DIFFERENT email.
     if (!existingByEmail && existingByFingerprint && existingByFingerprint.email !== normalizedEmail) {
       return jsonResponse(403, {
         success: false,
