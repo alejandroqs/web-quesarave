@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "wrangler dev",
     "db:init": "npx wrangler d1 execute quesarave --local --file=./schema.sql",
-    "deploy": "astro build && node -e \"require('fs').rmSync('dist/server/wrangler.json', {force: true})\" && npx wrangler pages deploy"
+    "deploy": "astro build && node -e \"const fs=require('fs'); fs.rmSync('dist/server/wrangler.json', {force: true}); fs.rmSync('.wrangler', {recursive: true, force: true});\" && npx wrangler pages deploy"
   },
   "dependencies": {
     "astro": "^6.0.0",
