@@ -47,15 +47,8 @@ export const POST: APIRoute = async (context) => {
     const userAgent = context.request.headers.get('user-agent') || 'unknown';
     const fingerprint = await generateFingerprint(ip, userAgent);
 
-    // 4. Resolve D1 database binding (uses cloudflare:workers env)
-    let db: any;
-    try {
-      // @ts-ignore
-      const workers = await import('cloudflare:workers');
-      db = workers.env.DB;
-    } catch (e) {
-      console.error('Failed to import cloudflare:workers', e);
-    }
+    // 4. Resolve D1 database binding via Astro Context
+    const db = (context.locals as any).runtime?.env?.DB;
 
     if (!db) {
       return jsonResponse(500, { success: false, error: 'Database binding "DB" not found.' });

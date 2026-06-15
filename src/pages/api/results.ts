@@ -14,15 +14,8 @@ function jsonResponse(status: number, body: object) {
 
 export const GET: APIRoute = async (context) => {
   try {
-    // Resolve D1 database binding
-    let db: any;
-    try {
-      // @ts-ignore
-      const workers = await import('cloudflare:workers');
-      db = workers.env.DB;
-    } catch (e) {
-      console.error('Failed to import cloudflare:workers', e);
-    }
+    // Resolve D1 database binding via Astro Context
+    const db = (context.locals as any).runtime?.env?.DB;
 
     if (!db) {
       return jsonResponse(500, { success: false, error: 'Database binding "DB" not found.' });
